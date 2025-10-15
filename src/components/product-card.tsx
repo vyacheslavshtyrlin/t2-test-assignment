@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { beutifyNumber, cn } from "../utils";
+import { beutifyNumber, cn, highlightNumbers } from "../utils";
+
+
 
 type TProps = {
   onClick: () => void;
@@ -49,7 +51,7 @@ export const ProductCard = ({
         role="product-card"
         variant={selected ? "selected" : "default"}
         extra={
-          <span>
+          <span title={String(weight) + "кг"}>
             {beutifyNumber(weight)} <br /> кг
           </span>
         }
@@ -62,9 +64,10 @@ export const ProductCard = ({
       >
         <div className="md:pl-8 pl-12 h-full relative pt-4 text-left min-w-0 overflow-hidden">
           <span
+            title={!isHoveredEnd ? description : "Котэ не одобряет?"}
             className={cn(
               { "text-danger": isHoveredEnd },
-              "text-sm block w-full truncate" // ← block + w-full + truncate
+              "text-sm block w-full truncate"
             )}
           >
             {!isHoveredEnd ? description : "Котэ не одобряет?"}
@@ -77,12 +80,15 @@ export const ProductCard = ({
           <h4 className="text-black text-2xl block w-full truncate">{type}</h4>
 
           <p className="text-sm mt-2 whitespace-pre-line break-words max-w-[10rem]">
-            {portions} порций
+            <span className="font-semibold">{portions}</span> порций
             <br />
-            {promo}
+            {highlightNumbers(promo)}
           </p>
 
-          <img className="rounded-lg absolute md-bottom-0 lg:-bottom-1 sm:-bottom-4 left-0 max-w-full" src={image} />
+          <img
+            className="rounded-lg absolute md-bottom-0 lg:-bottom-1 sm:-bottom-4 left-0 max-w-full"
+            src={image}
+          />
         </div>
       </Button>
 
@@ -111,3 +117,4 @@ export const ProductCard = ({
     </div>
   );
 };
+
