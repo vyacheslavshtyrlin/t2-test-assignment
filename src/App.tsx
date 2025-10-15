@@ -45,7 +45,7 @@ function App() {
               onClick={() => handleSelect(product.id)}
               className={cn(
                 "transition-transform duration-300",
-                index % 3 === 1 && "md:-translate-y-12 lg:translate-y-0"
+                index % 3 === 1 && "md:-translate-y-28 lg:translate-y-0"
               )}
             />
           ))}
